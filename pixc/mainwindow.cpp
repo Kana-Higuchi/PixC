@@ -16,11 +16,25 @@ MainWindow::~MainWindow()
 }
 
 CvFont font;
-IplImage *img = 0;
+IplImage *img = NULL;
+IplImage *gray = NULL;
+IplImage *bin = NULL;
+int pos =128;
 
 void on_trackbar1 (int val);
 void on_trackbar2 (int val);
 
+void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
+{
+    QImage image(this->size(), QImage::Format_ARGB32_Premultiplied);//空イメージ
+
+    QPainter imagePainter(&image);//空イメージを引数に
+    imagePainter.setRenderHint(QPainter::Antialiasing, true);
+    imagePainter.drawImage(50,50,QImage("/Users/minemuradaiki/Desktop/a.jpg"));/*空イメージに画像を描画*/
+
+    QPainter widgetPainter(this);//ウィジット用のQPainter
+    widgetPainter.drawImage(0, 150, image);//ウィジットに先ほど描いたイメージ描画
+}
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -153,34 +167,29 @@ void MainWindow::on_pushButton_4_clicked()
              tr("JPEG (*.jpg *.jpeg)\n"
                 "PNG (*.png)\n"
                 "BMP (*.bmp)"));
-    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
-    IplImage *gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
-    IplImage *bin = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
-
+    img =  cvLoadImage(fileName.toLocal8Bit());
     if( img == NULL ){
         fprintf(stderr, "no such file or directory\n");
         exit(-1);
     }
-
-    cvCvtColor(img, gray, CV_RGB2GRAY);
-    cvThreshold(gray, bin, 128, 255, CV_THRESH_BINARY);
-
     cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
-    cvShowImage("Image",bin);
+    cvCreateTrackbar("Trackbar1","Image",0,255,on_trackbar1);
+    cvCreateTrackbar("Trackbar2","Image",0,255,on_trackbar2);
+    on_trackbar1(0);
+    on_trackbar2(0);
+        char key;
+        key =static_cast<char>(cvWaitKey(0));
+        if(key == 's')
+        {
+            fileName =
+                   QFileDialog::getSaveFileName
+                        (this, tr("Open Image"), ".",
+                         tr("JPEG (*.jpg *.jpeg)\n"
+                            "PNG (*.png)\n"
+                            "BMP (*.bmp)"));
 
-    char key;
-    key =static_cast<char>(cvWaitKey(0));
-    if(key == 's')
-    {
-        fileName =
-               QFileDialog::getSaveFileName
-                    (this, tr("Open Image"), ".",
-                     tr("JPEG (*.jpg *.jpeg)\n"
-                        "PNG (*.png)\n"
-                        "BMP (*.bmp)"));
-
-        cvSaveImage(fileName.toLocal8Bit(),bin);
-    }
+            cvSaveImage(fileName.toLocal8Bit(),bin);
+        }
 
     cvReleaseImage(&img);
     cvReleaseImage(&bin);
@@ -189,26 +198,14 @@ void MainWindow::on_pushButton_4_clicked()
 
 /* コールバック関数 */
 void on_trackbar1(int val) {
-    char str[64];
-
-
-    // トラックバー2を，トラックバー1に同期させる
-  cvSetTrackbarPos ("Trackbar2", "Image", val);
-
-  // (4)トラックバー1の値を描画する
-  cvRectangle (img, cvPoint (0, 0), cvPoint (400, 50), cvScalar (0), CV_FILLED);
-  snprintf (str, 64, "%d", val);
-  cvPutText (img, str, cvPoint (15, 30), &font, CV_RGB (0, 200, 100));
-  cvShowImage ("Image", img);
-
+    gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
+    bin = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
+    cvCvtColor(img, gray, CV_RGB2GRAY);
+    cvThreshold(gray, bin,cvGetTrackbarPos ("Trackbar1", "Image"),cvGetTrackbarPos ("Trackbar2", "Image"), CV_THRESH_BINARY);
+    cvShowImage("Image",bin);
 }
 
 void on_trackbar2(int val) {
-      int pos1, pos2;
-      // トラックバー2の移動範囲を，トラックバー1の値±20に限定する
-      pos1 = cvGetTrackbarPos ("Trackbar1", "Image");
-      if (pos1 > val) pos2 = pos1 - 20 < val ? val : pos1 - 20;
-      else pos2 = pos1 + 20 > val ? val : pos1 + 20;
-      cvSetTrackbarPos("Trackbar2", "Image", pos2);
-
+    cvThreshold(gray, bin,cvGetTrackbarPos ("Trackbar1", "Image"),cvGetTrackbarPos ("Trackbar2", "Image"), CV_THRESH_BINARY);
+    cvShowImage("Image",bin);
     }
