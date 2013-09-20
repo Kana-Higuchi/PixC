@@ -13,9 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    custumlist.cpp \
+    custumview.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    custumlist.h \
+    custumview.h
 
 FORMS    += mainwindow.ui
 EPENDPATH += /opt/local/include

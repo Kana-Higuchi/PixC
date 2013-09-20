@@ -3,11 +3,32 @@
 #include <QFileDialog>
 #include "opencv/cv.h"       //cv.hを読み込む
 #include "opencv/highgui.h"  //highgui.hを読み込む
+#include <QLabel>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setAcceptDrops(true);
+    QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
+    label.show();
+    //ui->listWidgetはCustumListです。
+    ui->listWidget->addItem(new QListWidgetItem("Oak"));
+    ui->listWidget->addItem(new QListWidgetItem("Banana"));
+    ui->listWidget->addItem(new QListWidgetItem("Apple"));
+    ui->listWidget->addItem(new QListWidgetItem("Orange"));
+    ui->listWidget->addItem(new QListWidgetItem("Grapes"));
+    ui->listWidget->addItem(new QListWidgetItem("Jayesh"));
+
+    ui->listWidget->setIconSize(QSize(32,32));//アイコンサイズ３２×３２にセット
+
+    QListWidgetItem *qitem;//QListWidgetにセットされている各アイテムの受け皿となる
+
+    for(int i = 0; i < ui->listWidget->count(); i++)
+    {
+        qitem = ui->listWidget->item(i);//i行目のアイテム取り出し
+        qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));//アイコンセット
+    }
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +41,8 @@ IplImage *img = NULL;
 IplImage *gray = NULL;
 IplImage *bin = NULL;
 int pos =128;
-
+int posx=0;
+int posy=0;
 void on_trackbar1 (int val);
 void on_trackbar2 (int val);
 
@@ -33,7 +55,7 @@ void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
     imagePainter.drawImage(50,50,QImage("/Users/minemuradaiki/Desktop/a.jpg"));/*空イメージに画像を描画*/
 
     QPainter widgetPainter(this);//ウィジット用のQPainter
-    widgetPainter.drawImage(0, 150, image);//ウィジットに先ほど描いたイメージ描画
+    widgetPainter.drawImage(posx, posy, image);//ウィジットに先ほど描いたイメージ描画
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -195,8 +217,33 @@ void MainWindow::on_pushButton_4_clicked()
     cvReleaseImage(&bin);
     cvDestroyWindow("Image");
 }
+void MainWindow::mouseMoveEvent(QMouseEvent *e)
+{
+    startPos = e->pos();
+    posx=startPos.x();
+    posy=startPos.y();
+    update();
+}
 
-/* コールバック関数 */
+void MainWindow::dragEnterEvent(QDragEnterEvent *e)
+{
+
+        //視覚的にドロップを受付られることを
+        //表示し、ドラッグ＆ドロップを受け付ける
+        //これがないと受付られない。
+        e->acceptProposedAction();
+}
+
+void MainWindow::dropEvent(QDropEvent *e)
+{
+    //dragEnterEventの後にくるイベント
+    //ドロップの際の動作を記述する
+    startPos = e->pos();
+    posx=startPos.x();
+    posy=startPos.y();
+    update();
+}
+/* コOrangeールバック関数 */
 void on_trackbar1(int val) {
     gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
     bin = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
