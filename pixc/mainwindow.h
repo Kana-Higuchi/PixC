@@ -3,9 +3,16 @@
 
 #include <QMainWindow>
 #include <QGraphicsPixmapItem>
-#include "custumview.h"
 #include <qpainter.h>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsRectItem>
+#include<QRect>
+//#include <opencv2/opencv.hpp>
+#include<QClipboard>
 
+class Scene;
+class View;
 namespace Ui {
 class MainWindow;
 }
@@ -20,7 +27,6 @@ public:
     void mouseMoveEvent(QMouseEvent *e);//マウスカーソルを移動したら呼ばれる
     void dragEnterEvent(QDragEnterEvent *e);//----ここ重要！
     void dropEvent(QDropEvent *e);//----ここ重要！
-
 protected:
     void paintEvent(QPaintEvent *);//←ここ重要！ペイントイベント
     
@@ -33,9 +39,23 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_action_Copy_triggered();
+    void on_action_Delete_triggered();
+    void on_action_Open_triggered();
 private:
     Ui::MainWindow *ui;
     QPoint startPos;
+
+    void createSceneAndView();
+    void writeItems(QDataStream &out,
+                    const QList<QGraphicsItem*> &items);
+    Scene *scene;
+    View *view;
+    QGraphicsItemGroup *gridGroup;
+    QPoint previousPoint;
+    int addOffset;
+    int pasteOffset;
+
 };
 
 #endif // MAINWINDOW_H

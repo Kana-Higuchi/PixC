@@ -4,12 +4,26 @@
 #include "opencv/cv.h"       //cv.hを読み込む
 #include "opencv/highgui.h"  //highgui.hを読み込む
 #include <QLabel>
+#include "opencv2/core/core.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <QImage>
+#include <QGraphicsPixmapItem>
+#include <QClipboard>
+#include <QMimeData>
+#include "scene.h"
+#include "view.h"
+const int OffsetIncrement = 5;
+const QString ShowGrid("ShowGrid");
+const QString MostRecentFile("MostRecentFile");
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),gridGroup(0), addOffset(OffsetIncrement),
+    pasteOffset(OffsetIncrement)
 {
     ui->setupUi(this);
     setAcceptDrops(true);
+
     QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
     label.show();
     //ui->listWidgetはCustumListです。
@@ -29,13 +43,69 @@ MainWindow::MainWindow(QWidget *parent) :
         qitem = ui->listWidget->item(i);//i行目のアイテム取り出し
         qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));//アイコンセット
     }
+
+    //printer = new QPrinter(QPrinter::HighResolution);
+
+    createSceneAndView();
+    /*
+    createActions();
+    createMenusAndToolBars();
+    createDockWidgets();
+    createConnections();
+    QSettings settings;
+    viewShowGridAction->setChecked(
+            settings.value(ShowGrid, true).toBool());
+    QString filename = settings.value(MostRecentFile).toString();
+    if (filename.isEmpty() || filename == tr("Unnamed"))
+        QTimer::singleShot(0, this, SLOT(fileNew()));
+    else {
+        setWindowFilePath(filename);
+        QTimer::singleShot(0, this, SLOT(loadFile()));
+    }
+    */
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::createSceneAndView()
+{
+    scene = new Scene(this);//QGraphicsSceneオブジェクト生成
+    scene->setSceneRect(0, 0, 630, 470); //  シーン矩形部分
+    view = new View(ui->centralWidget);//QGraphicsViewオブジェクト生成
+    view->setScene(scene);//ビューにシーンを配置
+    view->setGeometry(0,0,640,480);
+    //addToolBar(view->getToolBar(this));
+    //scene->addRect(0, 0, 630,470, QPen(Qt::red), QBrush(Qt::white));   //シーン矩形部分に矩形を配置する
 
+    //view->setBackgroundBrush(QBrush(Qt::gray));//背景をグレイにする
+    //setCentralWidget(view);//ビューをセントラルウィジェットに設定
+    //view->show();
+    QGraphicsPixmapItem *kasa_06 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_06.png"));//シーンに画像を配置
+    QGraphicsPixmapItem *kasa_h_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_h_03.png" ));
+    QGraphicsPixmapItem *kasa_m_07 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_m_07.png"));
+    QGraphicsPixmapItem *kasa_migi_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_migi_03.png" ));
+    QGraphicsPixmapItem *kasa_y_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_y_03.png" ));
+    kasa_06->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+    kasa_h_03->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+    kasa_m_07 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+    kasa_migi_03 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+    kasa_y_03 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+}
+
+/*
+void MainWindow::copyItems(const QList<QGraphicsItem*> &items)
+{
+    QByteArray copiedItems;
+    QDataStream out(&copiedItems, QIODevice::WriteOnly);
+    writeItems(out, items);
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setData(MimeType, copiedItems);
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->setMimeData(mimeData);
+}
+*/
 CvFont font;
 IplImage *img = NULL;
 IplImage *gray = NULL;
@@ -48,14 +118,36 @@ void on_trackbar2 (int val);
 
 void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
 {
-    QImage image(this->size(), QImage::Format_ARGB32_Premultiplied);//空イメージ
+       /*
+    cv::Mat src = cv::imread("/Users/minemuradaiki/Desktop/a.jpg");
+    QImage img(src.data, src.cols, src.rows, QImage::Format_RGB888);
+    img = img.rgbSwapped(); //QImageの命令でRGBの順番を入れ替える
 
+    QPainter painter( this );
+    // 画像を描画
+    painter.drawImage( QPoint( 0, 0 ), img);
+
+    cv::Mat color_image = cv::imread("/Users/minemuradaiki/Desktop/a.jpg");
+    cv::Mat gray_image;
+    cv::cvtColor(color_image, gray_image, CV_BGR2GRAY); // BGR?
+
+    QImage img(gray_image.data,
+                 gray_image.cols,
+                 gray_image.rows,
+                 QImage::Format_Indexed8);
+    img = img.convertToFormat(QImage::Format_RGB32);
+
+    QPainter Painter(this);//ウィジット用のQPainter
+    Painter.drawImage(posx, posy, img);//ウィジットに先ほど描いたイメージ描
+
+    QImage image(this->size(), QImage::Format_ARGB32_Premultiplied);//空イメージ
     QPainter imagePainter(&image);//空イメージを引数に
     imagePainter.setRenderHint(QPainter::Antialiasing, true);
-    imagePainter.drawImage(50,50,QImage("/Users/minemuradaiki/Desktop/a.jpg"));/*空イメージに画像を描画*/
+    imagePainter.drawImage(50,50,QImage("/Users/minemuradaiki/Desktop/a.jpg"));//空イメージに画像を描画
 
     QPainter widgetPainter(this);//ウィジット用のQPainter
     widgetPainter.drawImage(posx, posy, image);//ウィジットに先ほど描いたイメージ描画
+    */
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -217,31 +309,41 @@ void MainWindow::on_pushButton_4_clicked()
     cvReleaseImage(&bin);
     cvDestroyWindow("Image");
 }
+
 void MainWindow::mouseMoveEvent(QMouseEvent *e)
 {
+    /*
     startPos = e->pos();
-    posx=startPos.x();
-    posy=startPos.y();
+    posx=startPos.x()-64;
+    posy=startPos.y()-64;
     update();
+    */
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
 
-        //視覚的にドロップを受付られることを
-        //表示し、ドラッグ＆ドロップを受け付ける
-        //これがないと受付られない。
         e->acceptProposedAction();
 }
 
 void MainWindow::dropEvent(QDropEvent *e)
 {
+    /*
     //dragEnterEventの後にくるイベント
     //ドロップの際の動作を記述する
     startPos = e->pos();
-    posx=startPos.x();
-    posy=startPos.y();
+    posx=startPos.x()-64;
+    posy=startPos.y()-64;
     update();
+    */
+    QString fileName =
+        QFileDialog::getOpenFileName
+            (this, tr("Open Image"), ".",
+             tr("JPEG (*.jpg *.jpeg)\n"
+                "PNG (*.png)\n"
+                "BMP (*.bmp)"));
+    QGraphicsPixmapItem *a = scene->addPixmap(QPixmap(fileName));
+    a->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
 }
 /* コOrangeールバック関数 */
 void on_trackbar1(int val) {
@@ -256,3 +358,71 @@ void on_trackbar2(int val) {
     cvThreshold(gray, bin,cvGetTrackbarPos ("Trackbar1", "Image"),cvGetTrackbarPos ("Trackbar2", "Image"), CV_THRESH_BINARY);
     cvShowImage("Image",bin);
     }
+
+void MainWindow::on_action_Copy_triggered()
+{
+    /*
+    QList<QGraphicsItem*> items = scene->selectedItems();
+    QClipboard *clipboard = QApplication::clipboard();
+    QMimeData *mimeData = new QMimeData;
+    clipboard->setMimeData(mimeData);
+*/
+    //アプリケーションのグローバルクリップボードのポインタを返す。
+        QList<QGraphicsItem*> items = scene->selectedItems();
+    QListIterator<QGraphicsItem*> i(items);
+    while (i.hasNext()) {
+        QScopedPointer<QGraphicsItem> item(i.next());
+        scene->removeItem(item.data());
+    }
+    //QByteArray copiedItems;
+    //QDataStream out(&copiedItems, QIODevice::WriteOnly);
+    //writeItems(out, items);
+    //QMimeData *mimeData = new QMimeData;
+    //mimeData->setData(MimeType,copiedItems);
+    /*
+    QClipboard *clipboard = QApplication::clipboard();
+    QMimeData *mimeData = new QMimeData();
+    QByteArray data((const QUrl *)&item);
+    mimeData->setData("CFSTR_DOUBLE", data);
+    clipboard->setMimeData(mimeData);
+    */
+    /*
+    QClipboard *clipboard = QApplication::clipboard();
+    clipboard->clear();
+    QMimeData *mimeData = new QMimeData();
+    QByteArray data(*item);
+    mimeData->setData("CFSTR_DOUBLE", data);
+    clipboard->setMimeData(mimeData);
+    */
+
+}
+void MainWindow::on_action_Delete_triggered(){
+    QList<QGraphicsItem*> items = scene->selectedItems();
+QListIterator<QGraphicsItem*> i(items);
+while (i.hasNext()) {
+    QScopedPointer<QGraphicsItem> item(i.next());
+    scene->removeItem(item.data());
+}
+}
+void MainWindow::on_action_Open_triggered(){
+    QString fileName =
+        QFileDialog::getOpenFileName
+            (this, tr("Open Image"), ".",
+             tr("JPEG (*.jpg *.jpeg)\n"
+                "PNG (*.png)\n"
+                "BMP (*.bmp)"));
+    QGraphicsPixmapItem *a = scene->addPixmap(QPixmap(fileName));
+    a->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+    //IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
+
+}
+void MainWindow::writeItems(QDataStream &out,
+                            const QList<QGraphicsItem*> &items)
+{
+    foreach (QGraphicsItem *item, items) {
+        if (item == gridGroup || item->group() == gridGroup)
+            continue;
+        qint32 type = static_cast<qint32>(item->type());
+        out << type;
+    }
+}

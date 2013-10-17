@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     custumlist.cpp \
-    custumview.cpp
+    scene.cpp \
+    view.cpp
 
 HEADERS  += mainwindow.h \
     custumlist.h \
-    custumview.h
+    scene.h \
+    view.h
 
 FORMS    += mainwindow.ui
 EPENDPATH += /opt/local/include
@@ -28,3 +30,14 @@ LIBS += -L/opt/local/lib/ \
      -lopencv_core \
      -lopencv_imgproc \
      -lopencv_highgui
+
+OTHER_FILES += \
+    kasa_y_03.png \
+    kasa_migi_03.png \
+    kasa_m_07.png \
+    kasa_kansei_02.png \
+    kasa_h_03.png \
+    kasa_06.png \
+    a.jpg
+
+RESOURCES +=
