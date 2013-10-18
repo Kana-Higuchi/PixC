@@ -56,7 +56,21 @@ void CustumList::startDrag()
         QDrag *drag = new QDrag(this);
         drag->setMimeData(mimeData);
         drag->setPixmap(QPixmap("/Users/minemuradaiki/Desktop/a.jpg"));
-
+        if(mimeData->text()=="kasa_06.png"){
+            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_06.png"));
+        }
+        else if(mimeData->text()=="kasa_h_03.png"){
+            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_h_03.png"));
+        }
+        else if(mimeData->text()=="kasa_m_07.png"){
+            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_m_07.png"));
+        }
+        else if(mimeData->text()=="kasa_migi_03.png"){
+            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_migi_03.png"));
+        }
+        else if(mimeData->text()=="kasa_y_03.png"){
+            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_y_03.png"));
+         }
         //ドラッグ処理の開始。
         //startはドラック＆ドロップが終わるまで処理が返らない
         if (drag->start(Qt::MoveAction) == Qt::MoveAction)

@@ -39,10 +39,28 @@ class View : public QGraphicsView
              e->acceptProposedAction();
          }
      }
-     void dropEvent( QDropEvent * e )
+     void dropEvent( QDropEvent *e)
      {
-   QGraphicsPixmapItem *kasa_06 = scene()->addPixmap(QPixmap("/Users/minemuradaiki/Desktop/a.jpg"));//シーンに画像を配置
-   kasa_06->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+        if(e->mimeData()->text()=="kasa_06.png"){
+             QGraphicsPixmapItem *kasa_06 = scene()->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_06.png"));//シーンに画像を配置
+             kasa_06->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+        }
+        else if(e->mimeData()->text()=="kasa_h_03.png"){
+             QGraphicsPixmapItem *kasa_h_03 = scene()->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_h_03.png" ));
+             kasa_h_03->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+        }
+        else if(e->mimeData()->text()=="kasa_m_07.png"){
+             QGraphicsPixmapItem *kasa_m_07 = scene()->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_m_07.png"));
+             kasa_m_07->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+        }
+        else if(e->mimeData()->text()=="kasa_migi_03.png"){
+             QGraphicsPixmapItem *kasa_migi_03 = scene()->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_migi_03.png" ));
+             kasa_migi_03->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+        }
+        else if(e->mimeData()->text()=="kasa_y_03.png"){
+             QGraphicsPixmapItem *kasa_y_03 = scene()->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_y_03.png" ));
+             kasa_y_03->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
+         }
      }
      void dragMoveEvent( QDragMoveEvent *e ) {}
      void dragLeaveEvent( QDragLeaveEvent * e ) {}
