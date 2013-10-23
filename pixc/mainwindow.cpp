@@ -27,13 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
     label.show();
     //ui->listWidgetはCustumListです。
-    ui->listWidget->addItem(new QListWidgetItem("Oak"));
-    ui->listWidget->addItem(new QListWidgetItem("Banana"));
-    ui->listWidget->addItem(new QListWidgetItem("Apple"));
-    ui->listWidget->addItem(new QListWidgetItem("Orange"));
-    ui->listWidget->addItem(new QListWidgetItem("Grapes"));
-    ui->listWidget->addItem(new QListWidgetItem("Jayesh"));
-
+    ui->listWidget->addItem(new QListWidgetItem("kasa_06.png"));
+    ui->listWidget->addItem(new QListWidgetItem("kasa_h_03.png"));
+    ui->listWidget->addItem(new QListWidgetItem("kasa_m_07.png"));
+    ui->listWidget->addItem(new QListWidgetItem("kasa_migi_03.png"));
+    ui->listWidget->addItem(new QListWidgetItem("kasa_y_03.png"));
     ui->listWidget->setIconSize(QSize(32,32));//アイコンサイズ３２×３２にセット
 
     QListWidgetItem *qitem;//QListWidgetにセットされている各アイテムの受け皿となる
@@ -41,7 +39,16 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i = 0; i < ui->listWidget->count(); i++)
     {
         qitem = ui->listWidget->item(i);//i行目のアイテム取り出し
-        qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));//アイコンセット
+        qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));
+        switch(i){
+            case 0:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_06.png"));break;//アイコンセット
+            case 1:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_h_03.png"));break;//アイコンセット
+            case 2:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_m_07.png"));break;//アイコンセット
+            case 3:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_migi_03.png"));break;//アイコンセット
+            case 4:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_y_03.png"));break;//アイコンセット
+            default:qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));break;//アイコンセット
+        }
+
     }
 
     //printer = new QPrinter(QPrinter::HighResolution);
@@ -82,16 +89,6 @@ void MainWindow::createSceneAndView()
     //view->setBackgroundBrush(QBrush(Qt::gray));//背景をグレイにする
     //setCentralWidget(view);//ビューをセントラルウィジェットに設定
     //view->show();
-    QGraphicsPixmapItem *kasa_06 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_06.png"));//シーンに画像を配置
-    QGraphicsPixmapItem *kasa_h_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_h_03.png" ));
-    QGraphicsPixmapItem *kasa_m_07 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_m_07.png"));
-    QGraphicsPixmapItem *kasa_migi_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_migi_03.png" ));
-    QGraphicsPixmapItem *kasa_y_03 = scene->addPixmap(QPixmap( "/Users/minemuradaiki/pixc/kasa_y_03.png" ));
-    kasa_06->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
-    kasa_h_03->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-    kasa_m_07 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-    kasa_migi_03 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-    kasa_y_03 ->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 }
 
 /*
@@ -425,4 +422,9 @@ void MainWindow::writeItems(QDataStream &out,
         qint32 type = static_cast<qint32>(item->type());
         out << type;
     }
+}
+
+void MainWindow::on_action_Print_triggered()
+{
+
 }

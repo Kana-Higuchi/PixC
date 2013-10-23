@@ -42,6 +42,8 @@ private slots:
     void on_action_Copy_triggered();
     void on_action_Delete_triggered();
     void on_action_Open_triggered();
+    void on_action_Print_triggered();
+
 private:
     Ui::MainWindow *ui;
     QPoint startPos;
