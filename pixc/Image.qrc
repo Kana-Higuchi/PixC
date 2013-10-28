@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/uiparts">
+        <file>icons/top/toolbar.png</file>
+        <file>icons/top/file.png</file>
+        <file>icons/top/help.png</file>
+        <file>icons/top/hensyu.png</file>
+    </qresource>
+    <qresource prefix="/pictgrams">
+        <file>picts/kasa_06.png</file>
+        <file>picts/kasa_h_03.png</file>
+        <file>picts/kasa_kansei_02.png</file>
+        <file>picts/kasa_m_07.png</file>
+        <file>picts/kasa_migi_03.png</file>
+        <file>picts/kasa_y_03.png</file>
+    </qresource>
+</RCC>

@@ -24,13 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setAcceptDrops(true);
 
-//    -----ver.Novelist-----
-//    QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
-//    ----------------------
-
-//    -----ver.Kana.H-----
-    QLabel label("<img src='/Users/Kana/work/PixC/pixc/a.jpg' />");
-//    --------------------
+    QLabel label("<img src=':pictgrams/picts/a.jpg' />");
 
     label.show();
 
@@ -48,37 +42,13 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         qitem = ui->listWidget->item(i);//i行目のアイテム取り出し
 
-
-//      ------ver.Kana.H-----
-        qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/a.jpg"));
-//      ---------------------
-
-//      -----ver.Novelist-----
-//      qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));
-//      ----------------------
-
-
-//      ------ver.Kana.H-----
         switch(i){
-        case 0:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_06.png"));break;//アイコンセット
-        case 1:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_h_03.png"));break;//アイコンセット
-        case 2:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_m_07.png"));break;//アイコンセット
-        case 3:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_migi_03.png"));break;//アイコンセット
-        case 4:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_y_03.png"));break;//アイコンセット
-        default:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/a.jpg"));break;//アイコンセット
-//      ---------------------
-
-
-//        -----ver.Novelist-----
-
-//       case 0:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_06.png"));break;//アイコンセット
-//       case 1:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_h_03.png"));break;//アイコンセット
-//       case 2:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_m_07.png"));break;//アイコンセット
-//       case 3:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_migi_03.png"));break;//アイコンセット
-//       case 4:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_y_03.png"));break;//アイコンセット
-//       default:qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));break;//アイコンセット
-
-//       ----------------------
+        case 0:qitem->setIcon(QIcon(":pictgrams/picts/kasa_06.png"));break;//アイコンセット
+        case 1:qitem->setIcon(QIcon(":pictgrams/picts/kasa_h_03.png"));break;//アイコンセット
+        case 2:qitem->setIcon(QIcon(":pictgrams/picts/kasa_m_07.png"));break;//アイコンセット
+        case 3:qitem->setIcon(QIcon(":pictgrams/picts/kasa_migi_03.png"));break;//アイコンセット
+        case 4:qitem->setIcon(QIcon(":pictgrams/picts/kasa_y_03.png"));break;//アイコンセット
+        default:qitem->setIcon(QIcon(":pictgrams/picts/a.jpg"));break;//アイコンセット
 
         }
 
@@ -112,10 +82,11 @@ MainWindow::~MainWindow()
 void MainWindow::createSceneAndView()
 {
     scene = new Scene(this);//QGraphicsSceneオブジェクト生成
-    scene->setSceneRect(0, 0, 630, 470); //  シーン矩形部分
+    scene->setSceneRect(0,0, 560, 560); //  シーン矩形部分
     view = new View(ui->centralWidget);//QGraphicsViewオブジェクト生成
     view->setScene(scene);//ビューにシーンを配置
-    view->setGeometry(0,0,640,480);
+    view->setGeometry(250,100,570,570);
+    view->setBackgroundBrush(QBrush(Qt::white));
     //addToolBar(view->getToolBar(this));
     //scene->addRect(0, 0, 630,470, QPen(Qt::red), QBrush(Qt::white));   //シーン矩形部分に矩形を配置する
 
@@ -141,8 +112,8 @@ IplImage *img = NULL;
 IplImage *gray = NULL;
 IplImage *bin = NULL;
 int pos =128;
-int posx=0;
-int posy=0;
+int posx=200;
+int posy=100;
 void on_trackbar1 (int val);
 void on_trackbar2 (int val);
 
@@ -366,14 +337,6 @@ void MainWindow::dropEvent(QDropEvent *e)
     posy=startPos.y()-64;
     update();
     */
-    QString fileName =
-        QFileDialog::getOpenFileName
-            (this, tr("Open Image"), ".",
-             tr("JPEG (*.jpg *.jpeg)\n"
-                "PNG (*.png)\n"
-                "BMP (*.bmp)"));
-    QGraphicsPixmapItem *a = scene->addPixmap(QPixmap(fileName));
-    a->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
 }
 /* コOrangeールバック関数 */
 void on_trackbar1(int val) {

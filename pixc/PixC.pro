@@ -6,14 +6,8 @@
 # To System team
 #
 # 実行するには以下のファイルを書き換えて下さい。
-# ※主に画像のpathです。後々改善できたらいいね。
-# その際には他の人のpathは消さずにコメントアウトで。
 #
 #  PixC.pro
-#  view.h
-#  custumlist.cpp (void CustumList::startDrag())
-#  mainwindow.cpp
-#  scene.cpp
 #
 #
 #-------------------------------------------------
@@ -62,13 +56,6 @@ LIBS += -L/usr/local/Cellar/opencv/2.4.5/lib/ \
 
 #-------------------
 
-OTHER_FILES += \
-    kasa_y_03.png \
-    kasa_migi_03.png \
-    kasa_m_07.png \
-    kasa_kansei_02.png \
-    kasa_h_03.png \
-    kasa_06.png \
-    a.jpg
 
-RESOURCES +=
+RESOURCES += \
+    Image.qrc
