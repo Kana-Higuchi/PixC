@@ -42,6 +42,49 @@ void CustumList::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
+// -----ver.Novelist-----
+
+//void CustumList::startDrag()
+//{
+//    //現在選択中のアイテム
+//    QListWidgetItem *item = currentItem();
+
+//    if (item)
+//    {
+//        QMimeData *mimeData = new QMimeData;
+//        mimeData->setText(item->text());
+
+//        //ドラッグ中のアイコンのセット
+//        QDrag *drag = new QDrag(this);
+//        drag->setMimeData(mimeData);
+//        drag->setPixmap(QPixmap("/Users/minemuradaiki/Desktop/a.jpg"));
+//        if(mimeData->text()=="kasa_06.png"){
+//            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_06.png"));
+//        }
+//        else if(mimeData->text()=="kasa_h_03.png"){
+//            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_h_03.png"));
+//        }
+//        else if(mimeData->text()=="kasa_m_07.png"){
+//            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_m_07.png"));
+//        }
+//        else if(mimeData->text()=="kasa_migi_03.png"){
+//            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_migi_03.png"));
+//        }
+//        else if(mimeData->text()=="kasa_y_03.png"){
+//            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_y_03.png"));
+//         }
+//        //ドラッグ処理の開始。
+//        //startはドラック＆ドロップが終わるまで処理が返らない
+//        if (drag->start(Qt::MoveAction) == Qt::MoveAction)
+//            delete item;
+//    }
+//}
+
+// ----------------------
+
+
+// -----ver.Kana.H-----
+
 void CustumList::startDrag()
 {
     //現在選択中のアイテム
@@ -55,21 +98,21 @@ void CustumList::startDrag()
         //ドラッグ中のアイコンのセット
         QDrag *drag = new QDrag(this);
         drag->setMimeData(mimeData);
-        drag->setPixmap(QPixmap("/Users/minemuradaiki/Desktop/a.jpg"));
+        drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/a.jpg"));
         if(mimeData->text()=="kasa_06.png"){
-            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_06.png"));
+            drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_06.png"));
         }
         else if(mimeData->text()=="kasa_h_03.png"){
-            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_h_03.png"));
+            drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_h_03.png"));
         }
         else if(mimeData->text()=="kasa_m_07.png"){
-            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_m_07.png"));
+            drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_m_07.png"));
         }
         else if(mimeData->text()=="kasa_migi_03.png"){
-            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_migi_03.png"));
+            drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_migi_03.png"));
         }
         else if(mimeData->text()=="kasa_y_03.png"){
-            drag->setPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_y_03.png"));
+            drag->setPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_y_03.png"));
          }
         //ドラッグ処理の開始。
         //startはドラック＆ドロップが終わるまで処理が返らない
@@ -77,6 +120,8 @@ void CustumList::startDrag()
             delete item;
     }
 }
+// --------------------
+
 
 void CustumList::dragEnterEvent(QDragEnterEvent *e)
 {

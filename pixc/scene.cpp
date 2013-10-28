@@ -46,6 +46,18 @@ void Scene::dropEvent(QDropEvent *e)
     posy=startPos.y()-64;
     update();
     */
-    QGraphicsPixmapItem *a = addPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_06.png"));
+
+    // -----ver.Kana.H------
+
+    QGraphicsPixmapItem *a = addPixmap(QPixmap("/Users/Kana/work/PixC/pixc/kasa_06.png"));
+
+    // ---------------------
+
+
+    // -----ver.Novelist-----
+    //
+    //    QGraphicsPixmapItem *a = addPixmap(QPixmap("/Users/minemuradaiki/pixc/kasa_06.png"));
+    //
+    // ---------------------
     a->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);//画像オブジェクトを動作、選択できるようにする
 }

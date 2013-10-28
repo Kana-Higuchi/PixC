@@ -24,8 +24,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setAcceptDrops(true);
 
-    QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
+//    -----ver.Novelist-----
+//    QLabel label("<img src='/Users/minemuradaiki/Desktop/a.jpg' />");
+//    ----------------------
+
+//    -----ver.Kana.H-----
+    QLabel label("<img src='/Users/Kana/work/PixC/pixc/a.jpg' />");
+//    --------------------
+
     label.show();
+
     //ui->listWidgetはCustumListです。
     ui->listWidget->addItem(new QListWidgetItem("kasa_06.png"));
     ui->listWidget->addItem(new QListWidgetItem("kasa_h_03.png"));
@@ -39,14 +47,39 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i = 0; i < ui->listWidget->count(); i++)
     {
         qitem = ui->listWidget->item(i);//i行目のアイテム取り出し
-        qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));
+
+
+//      ------ver.Kana.H-----
+        qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/a.jpg"));
+//      ---------------------
+
+//      -----ver.Novelist-----
+//      qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));
+//      ----------------------
+
+
+//      ------ver.Kana.H-----
         switch(i){
-            case 0:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_06.png"));break;//アイコンセット
-            case 1:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_h_03.png"));break;//アイコンセット
-            case 2:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_m_07.png"));break;//アイコンセット
-            case 3:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_migi_03.png"));break;//アイコンセット
-            case 4:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_y_03.png"));break;//アイコンセット
-            default:qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));break;//アイコンセット
+        case 0:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_06.png"));break;//アイコンセット
+        case 1:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_h_03.png"));break;//アイコンセット
+        case 2:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_m_07.png"));break;//アイコンセット
+        case 3:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_migi_03.png"));break;//アイコンセット
+        case 4:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/kasa_y_03.png"));break;//アイコンセット
+        default:qitem->setIcon(QIcon("/Users/Kana/work/PixC/pixc/a.jpg"));break;//アイコンセット
+//      ---------------------
+
+
+//        -----ver.Novelist-----
+
+//       case 0:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_06.png"));break;//アイコンセット
+//       case 1:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_h_03.png"));break;//アイコンセット
+//       case 2:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_m_07.png"));break;//アイコンセット
+//       case 3:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_migi_03.png"));break;//アイコンセット
+//       case 4:qitem->setIcon(QIcon("/Users/minemuradaiki/pixc/kasa_y_03.png"));break;//アイコンセット
+//       default:qitem->setIcon(QIcon("/Users/minemuradaiki/Desktop/a.jpg"));break;//アイコンセット
+
+//       ----------------------
+
         }
 
     }
@@ -147,165 +180,165 @@ void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
     */
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    QString fileName =
-        QFileDialog::getOpenFileName
-            (this, tr("Open Image"), ".",
-             tr("JPEG (*.jpg *.jpeg)\n"
-                "PNG (*.png)\n"
-                "BMP (*.bmp)"));
+//void MainWindow::on_pushButton_clicked()
+//{
+//    QString fileName =
+//        QFileDialog::getOpenFileName
+//            (this, tr("Open Image"), ".",
+//             tr("JPEG (*.jpg *.jpeg)\n"
+//                "PNG (*.png)\n"
+//                "BMP (*.bmp)"));
 
-    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
-    if( img == NULL ){
-        fprintf(stderr, "no such file or directory\n");
-        exit(-1);
-    }
+//    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
+//    if( img == NULL ){
+//        fprintf(stderr, "no such file or directory\n");
+//        exit(-1);
+//    }
 
-    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
+//    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
 
-    cvShowImage("Image",img);
+//    cvShowImage("Image",img);
 
-    char key;
-    key =static_cast<char>(cvWaitKey(0));
-    if(key == 's')
-    {
-        fileName =
-               QFileDialog::getSaveFileName
-                    (this, tr("Open Image"), ".",
-                     tr("JPEG (*.jpg *.jpeg)\n"
-                        "PNG (*.png)\n"
-                        "BMP (*.bmp)"));
+//    char key;
+//    key =static_cast<char>(cvWaitKey(0));
+//    if(key == 's')
+//    {
+//        fileName =
+//               QFileDialog::getSaveFileName
+//                    (this, tr("Open Image"), ".",
+//                     tr("JPEG (*.jpg *.jpeg)\n"
+//                        "PNG (*.png)\n"
+//                        "BMP (*.bmp)"));
 
-        cvSaveImage(fileName.toLocal8Bit(),img);
-            /*
-    cvSaveImage( "/Users/minemuradaiki/Pictures/out.png", img); //保存
-        std::cout << "Save Image.\n";
-        */
-    }
-    cvReleaseImage(&img);
-    cvDestroyWindow("Image");
-}
+//        cvSaveImage(fileName.toLocal8Bit(),img);
+//            /*
+//    cvSaveImage( "/Users/minemuradaiki/Pictures/out.png", img); //保存
+//        std::cout << "Save Image.\n";
+//        */
+//    }
+//    cvReleaseImage(&img);
+//    cvDestroyWindow("Image");
+//}
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    QString fileName =
-        QFileDialog::getOpenFileName
-            (this, tr("Open Image"), ".",
-             tr("JPEG (*.jpg *.jpeg)\n"
-                "PNG (*.png)\n"
-                "BMP (*.bmp)"));
-    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
-    IplImage *resized = cvCreateImage(cvSize(img->width/2, img->height/2), IPL_DEPTH_8U, 3);
+//void MainWindow::on_pushButton_2_clicked()
+//{
+//    QString fileName =
+//        QFileDialog::getOpenFileName
+//            (this, tr("Open Image"), ".",
+//             tr("JPEG (*.jpg *.jpeg)\n"
+//                "PNG (*.png)\n"
+//                "BMP (*.bmp)"));
+//    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
+//    IplImage *resized = cvCreateImage(cvSize(img->width/2, img->height/2), IPL_DEPTH_8U, 3);
 
-    if( img == NULL ){
-        fprintf(stderr, "no such file or directory\n");
-        exit(-1);
-    }
+//    if( img == NULL ){
+//        fprintf(stderr, "no such file or directory\n");
+//        exit(-1);
+//    }
 
-    cvResize(img, resized, CV_INTER_CUBIC);
+//    cvResize(img, resized, CV_INTER_CUBIC);
 
-    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
-    cvShowImage("Image",resized);
+//    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
+//    cvShowImage("Image",resized);
 
 
 
-    char key;
-    key =static_cast<char>(cvWaitKey(0));
-    if(key == 's')
-    {
-        fileName =
-               QFileDialog::getSaveFileName
-                    (this, tr("Open Image"), ".",
-                     tr("JPEG (*.jpg *.jpeg)\n"
-                        "PNG (*.png)\n"
-                        "BMP (*.bmp)"));
+//    char key;
+//    key =static_cast<char>(cvWaitKey(0));
+//    if(key == 's')
+//    {
+//        fileName =
+//               QFileDialog::getSaveFileName
+//                    (this, tr("Open Image"), ".",
+//                     tr("JPEG (*.jpg *.jpeg)\n"
+//                        "PNG (*.png)\n"
+//                        "BMP (*.bmp)"));
 
-        cvSaveImage(fileName.toLocal8Bit(),resized);
-    }
+//        cvSaveImage(fileName.toLocal8Bit(),resized);
+//    }
 
-    cvReleaseImage(&img);
-    cvReleaseImage(&resized);
-    cvDestroyWindow("Image");
+//    cvReleaseImage(&img);
+//    cvReleaseImage(&resized);
+//    cvDestroyWindow("Image");
 
-}
+//}
 
-void MainWindow::on_pushButton_3_clicked()
-{
-    QString fileName =
-        QFileDialog::getOpenFileName
-            (this, tr("Open Image"), ".",
-             tr("JPEG (*.jpg *.jpeg)\n"
-                "PNG (*.png)\n"
-                "BMP (*.bmp)"));
-    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
-    IplImage *gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
+//void MainWindow::on_pushButton_3_clicked()
+//{
+//    QString fileName =
+//        QFileDialog::getOpenFileName
+//            (this, tr("Open Image"), ".",
+//             tr("JPEG (*.jpg *.jpeg)\n"
+//                "PNG (*.png)\n"
+//                "BMP (*.bmp)"));
+//    IplImage *img =  cvLoadImage(fileName.toLocal8Bit());
+//    IplImage *gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
 
-    if( img == NULL ){
-        fprintf(stderr, "no such file or directory\n");
-        exit(-1);
-    }
+//    if( img == NULL ){
+//        fprintf(stderr, "no such file or directory\n");
+//        exit(-1);
+//    }
 
-    cvCvtColor(img, gray, CV_RGB2GRAY);
+//    cvCvtColor(img, gray, CV_RGB2GRAY);
 
-    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
-    cvShowImage("Image",gray);
+//    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
+//    cvShowImage("Image",gray);
 
-    char key;
-    key =static_cast<char>(cvWaitKey(0));
-    if(key == 's')
-    {
-        fileName =
-               QFileDialog::getSaveFileName
-                    (this, tr("Open Image"), ".",
-                     tr("JPEG (*.jpg *.jpeg)\n"
-                        "PNG (*.png)\n"
-                        "BMP (*.bmp)"));
+//    char key;
+//    key =static_cast<char>(cvWaitKey(0));
+//    if(key == 's')
+//    {
+//        fileName =
+//               QFileDialog::getSaveFileName
+//                    (this, tr("Open Image"), ".",
+//                     tr("JPEG (*.jpg *.jpeg)\n"
+//                        "PNG (*.png)\n"
+//                        "BMP (*.bmp)"));
 
-        cvSaveImage(fileName.toLocal8Bit(),gray);
-    }
+//        cvSaveImage(fileName.toLocal8Bit(),gray);
+//    }
 
-    cvReleaseImage(&img);
-    cvReleaseImage(&gray);
-    cvDestroyWindow("Image");
-}
+//    cvReleaseImage(&img);
+//    cvReleaseImage(&gray);
+//    cvDestroyWindow("Image");
+//}
 
-void MainWindow::on_pushButton_4_clicked()
-{
-    QString fileName =
-        QFileDialog::getOpenFileName
-            (this, tr("Open Image"), ".",
-             tr("JPEG (*.jpg *.jpeg)\n"
-                "PNG (*.png)\n"
-                "BMP (*.bmp)"));
-    img =  cvLoadImage(fileName.toLocal8Bit());
-    if( img == NULL ){
-        fprintf(stderr, "no such file or directory\n");
-        exit(-1);
-    }
-    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
-    cvCreateTrackbar("Trackbar1","Image",0,255,on_trackbar1);
-    cvCreateTrackbar("Trackbar2","Image",0,255,on_trackbar2);
-    on_trackbar1(0);
-    on_trackbar2(0);
-        char key;
-        key =static_cast<char>(cvWaitKey(0));
-        if(key == 's')
-        {
-            fileName =
-                   QFileDialog::getSaveFileName
-                        (this, tr("Open Image"), ".",
-                         tr("JPEG (*.jpg *.jpeg)\n"
-                            "PNG (*.png)\n"
-                            "BMP (*.bmp)"));
+//void MainWindow::on_pushButton_4_clicked()
+//{
+//    QString fileName =
+//        QFileDialog::getOpenFileName
+//            (this, tr("Open Image"), ".",
+//             tr("JPEG (*.jpg *.jpeg)\n"
+//                "PNG (*.png)\n"
+//                "BMP (*.bmp)"));
+//    img =  cvLoadImage(fileName.toLocal8Bit());
+//    if( img == NULL ){
+//        fprintf(stderr, "no such file or directory\n");
+//        exit(-1);
+//    }
+//    cvNamedWindow("Image",CV_WINDOW_AUTOSIZE);
+//    cvCreateTrackbar("Trackbar1","Image",0,255,on_trackbar1);
+//    cvCreateTrackbar("Trackbar2","Image",0,255,on_trackbar2);
+//    on_trackbar1(0);
+//    on_trackbar2(0);
+//        char key;
+//        key =static_cast<char>(cvWaitKey(0));
+//        if(key == 's')
+//        {
+//            fileName =
+//                   QFileDialog::getSaveFileName
+//                        (this, tr("Open Image"), ".",
+//                         tr("JPEG (*.jpg *.jpeg)\n"
+//                            "PNG (*.png)\n"
+//                            "BMP (*.bmp)"));
 
-            cvSaveImage(fileName.toLocal8Bit(),bin);
-        }
+//            cvSaveImage(fileName.toLocal8Bit(),bin);
+//        }
 
-    cvReleaseImage(&img);
-    cvReleaseImage(&bin);
-    cvDestroyWindow("Image");
-}
+//    cvReleaseImage(&img);
+//    cvReleaseImage(&bin);
+//    cvDestroyWindow("Image");
+//}
 
 void MainWindow::mouseMoveEvent(QMouseEvent *e)
 {

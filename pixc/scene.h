@@ -38,7 +38,7 @@ protected:
     //void mouseReleaseEvent ( QGraphicsSceneMouseEvent *e);
     //void mouseMoveEvent ( QGraphicsSceneMouseEvent *e);
     void dragEnterEvent(QDragEnterEvent  *e );
-void mouseMoveEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
     void dragLeaveEvent(QGraphicsSceneDragDropEvent * e ) {}
     void dropEvent(QDropEvent *e );
 
