@@ -4,6 +4,16 @@
         <file>icons/top/file.png</file>
         <file>icons/top/help.png</file>
         <file>icons/top/hensyu.png</file>
+        <file>icons/left/hanten.png</file>
+        <file>icons/left/hantenjyouge.png</file>
+        <file>icons/left/hidarikaiten.png</file>
+        <file>icons/left/kakudai.png</file>
+        <file>icons/left/kasane.png</file>
+        <file>icons/left/migikaiten.png</file>
+        <file>icons/left/modoru.png</file>
+        <file>icons/left/seiton.png</file>
+        <file>icons/left/susumu.png</file>
+        <file>icons/left/syukusyou.png</file>
     </qresource>
     <qresource prefix="/pictgrams">
         <file>picts/kasa_06.png</file>

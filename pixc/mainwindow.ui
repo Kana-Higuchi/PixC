@@ -10,8 +10,17 @@
     <height>832</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::WheelFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
@@ -42,6 +51,439 @@
     <property name="styleSheet">
      <string notr="true">border-image: url(:/uiparts/icons/top/toolbar.png);</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="file_button">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>30</y>
+      <width>60</width>
+      <height>56</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="Image.qrc">
+      <normaloff>:/uiparts/icons/top/file.png</normaloff>:/uiparts/icons/top/file.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>56</width>
+      <height>56</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="edit_button">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>30</y>
+      <width>60</width>
+      <height>56</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="Image.qrc">
+      <normaloff>:/uiparts/icons/top/hensyu.png</normaloff>:/uiparts/icons/top/hensyu.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>56</width>
+      <height>56</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="help_button">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>30</y>
+      <width>60</width>
+      <height>56</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="Image.qrc">
+      <normaloff>:/uiparts/icons/top/help.png</normaloff>:/uiparts/icons/top/help.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>56</width>
+      <height>56</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>161</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="3" column="0" colspan="2">
+      <widget class="QPushButton" name="sort_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/seiton.png</normaloff>:/uiparts/icons/left/seiton.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="QPushButton" name="pile_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/kasane.png</normaloff>:/uiparts/icons/left/kasane.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="forward_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/susumu.png</normaloff>:/uiparts/icons/left/susumu.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="left_turn_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/hidarikaiten.png</normaloff>:/uiparts/icons/left/hidarikaiten.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="back_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/modoru.png</normaloff>:/uiparts/icons/left/modoru.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="right_turn_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/migikaiten.png</normaloff>:/uiparts/icons/left/migikaiten.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="reduction_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/syukusyou.png</normaloff>:/uiparts/icons/left/syukusyou.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="extension_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/kakudai.png</normaloff>:/uiparts/icons/left/kakudai.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="frip_v_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/hantenjyouge.png</normaloff>:/uiparts/icons/left/hantenjyouge.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="frip_h_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background-color:none;
+	border: 0px;
+}
+QPushButton:hover{
+	position:relative;
+	top:3px;
+	left:3px;
+}
+QPushButton:pressed {
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Image.qrc">
+         <normaloff>:/uiparts/icons/left/hanten.png</normaloff>:/uiparts/icons/left/hanten.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>56</width>
+         <height>56</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -123,7 +565,9 @@
    <header>custumlist.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="Image.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>action_Copy</sender>
