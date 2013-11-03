@@ -13,6 +13,11 @@
 #include <QMimeData>
 #include "scene.h"
 #include "view.h"
+#include <QLabel>
+#include <QLayout>
+#include <QGraphicsProxyWidget>
+
+
 const int OffsetIncrement = 5;
 const QString ShowGrid("ShowGrid");
 const QString MostRecentFile("MostRecentFile");
@@ -23,10 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setAcceptDrops(true);
-
-    QLabel label("<img src=':pictgrams/picts/a.jpg' />");
-
-    label.show();
 
     //ui->listWidgetはCustumListです。
     ui->listWidget->addItem(new QListWidgetItem("kasa_06.png"));
@@ -57,6 +58,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //printer = new QPrinter(QPrinter::HighResolution);
 
     createSceneAndView();
+
+
     /*
     createActions();
     createMenusAndToolBars();
@@ -81,18 +84,24 @@ MainWindow::~MainWindow()
 }
 void MainWindow::createSceneAndView()
 {
+
+
     scene = new Scene(this);//QGraphicsSceneオブジェクト生成
-    scene->setSceneRect(0,0, 560, 560); //  シーン矩形部分
+    scene->setSceneRect(0,0, 560, 560); //  シーン矩形部分o
+    QGraphicsProxyWidget *pw = scene->addWidget(ui->textlabel);
+
     view = new View(ui->centralWidget);//QGraphicsViewオブジェクト生成
     view->setScene(scene);//ビューにシーンを配置
-    view->setGeometry(250,100,570,570);
-    view->setBackgroundBrush(QBrush(Qt::white));
+    view->setGeometry(280,120,570,570);
+    view->setAttribute(Qt::WA_TranslucentBackground, true);
+
+    //    view->setBackgroundBrush(QBrush(Qt::white));
     //addToolBar(view->getToolBar(this));
     //scene->addRect(0, 0, 630,470, QPen(Qt::red), QBrush(Qt::white));   //シーン矩形部分に矩形を配置する
 
-    //view->setBackgroundBrush(QBrush(Qt::gray));//背景をグレイにする
-    //setCentralWidget(view);//ビューをセントラルウィジェットに設定
-    //view->show();
+    //    view->setBackgroundBrush(QBrush(Qt::gray));//背景をグレイにする
+    //    setCentralWidget(view);//ビューをセントラルウィジェットに設定
+    //    view->show();
 }
 
 /*
@@ -119,7 +128,7 @@ void on_trackbar2 (int val);
 
 void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
 {
-       /*
+    /*
     cv::Mat src = cv::imread("/Users/minemuradaiki/Desktop/a.jpg");
     QImage img(src.data, src.cols, src.rows, QImage::Format_RGB888);
     img = img.rgbSwapped(); //QImageの命令でRGBの順番を入れ替える
@@ -324,7 +333,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
 
-        e->acceptProposedAction();
+    e->acceptProposedAction();
 }
 
 void MainWindow::dropEvent(QDropEvent *e)
@@ -350,7 +359,7 @@ void on_trackbar1(int val) {
 void on_trackbar2(int val) {
     cvThreshold(gray, bin,cvGetTrackbarPos ("Trackbar1", "Image"),cvGetTrackbarPos ("Trackbar2", "Image"), CV_THRESH_BINARY);
     cvShowImage("Image",bin);
-    }
+}
 
 void MainWindow::on_action_Copy_triggered()
 {
@@ -361,7 +370,7 @@ void MainWindow::on_action_Copy_triggered()
     clipboard->setMimeData(mimeData);
 */
     //アプリケーションのグローバルクリップボードのポインタを返す。
-        QList<QGraphicsItem*> items = scene->selectedItems();
+    QList<QGraphicsItem*> items = scene->selectedItems();
     QListIterator<QGraphicsItem*> i(items);
     while (i.hasNext()) {
         QScopedPointer<QGraphicsItem> item(i.next());
@@ -391,15 +400,15 @@ void MainWindow::on_action_Copy_triggered()
 }
 void MainWindow::on_action_Delete_triggered(){
     QList<QGraphicsItem*> items = scene->selectedItems();
-QListIterator<QGraphicsItem*> i(items);
-while (i.hasNext()) {
-    QScopedPointer<QGraphicsItem> item(i.next());
-    scene->removeItem(item.data());
-}
+    QListIterator<QGraphicsItem*> i(items);
+    while (i.hasNext()) {
+        QScopedPointer<QGraphicsItem> item(i.next());
+        scene->removeItem(item.data());
+    }
 }
 void MainWindow::on_action_Open_triggered(){
     QString fileName =
-        QFileDialog::getOpenFileName
+            QFileDialog::getOpenFileName
             (this, tr("Open Image"), ".",
              tr("JPEG (*.jpg *.jpeg)\n"
                 "PNG (*.png)\n"
@@ -423,4 +432,37 @@ void MainWindow::writeItems(QDataStream &out,
 void MainWindow::on_action_Print_triggered()
 {
 
+}
+
+void MainWindow::on_left_text_button_clicked()
+{
+    ui->textlabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+}
+
+void MainWindow::on_center_text_button_clicked()
+{
+    ui->textlabel->setAlignment(Qt::AlignCenter);
+}
+
+void MainWindow::on_right_text_button_clicked()
+{
+    ui->textlabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+}
+
+void MainWindow::on_text_insert_button_clicked()
+{
+    QString fon = ui->fontComboBox->currentText();
+    int value = ui->spinBox->value();
+    ui->textlabel->setFont( QFont(fon, value, QFont::Bold) );
+    QString str = ui->textEdit->toPlainText();
+    ui->textlabel->setText(str);
+}
+
+
+void MainWindow::on_textsize_slider_valueChanged(int value)
+{
+    QString fon = ui->fontComboBox->currentText();
+    ui->textlabel->setFont(QFont(fon,value,QFont::Bold));
+    QString str = ui->textEdit->toPlainText();
+    ui->textlabel->setText(str);
 }

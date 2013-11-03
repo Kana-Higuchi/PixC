@@ -8,6 +8,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include<QRect>
+#include <QLabel>
 //#include <opencv2/opencv.hpp>
 #include<QClipboard>
 
@@ -41,10 +42,21 @@ private slots:
     void on_action_Open_triggered();
     void on_action_Print_triggered();
 
+    void on_text_insert_button_clicked();
+
+    void on_center_text_button_clicked();
+
+    void on_right_text_button_clicked();
+
+    void on_left_text_button_clicked();
+
+    void on_textsize_slider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     QPoint startPos;
-
+    QLabel *test;
+    QGraphicsProxyWidget *proxy;
     void createSceneAndView();
     void writeItems(QDataStream &out,
                     const QList<QGraphicsItem*> &items);

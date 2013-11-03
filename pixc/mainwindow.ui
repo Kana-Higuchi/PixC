@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1290</width>
-    <height>832</height>
+    <width>1276</width>
+    <height>756</height>
    </rect>
   </property>
   <property name="focusPolicy">
-   <enum>Qt::WheelFocus</enum>
+   <enum>Qt::TabFocus</enum>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -26,25 +26,12 @@
    <property name="styleSheet">
     <string notr="true">background-color: rgb(88, 88, 88);</string>
    </property>
-   <widget class="CustumList" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>900</x>
-      <y>50</y>
-      <width>300</width>
-      <height>620</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>280</x>
       <y>30</y>
-      <width>560</width>
+      <width>571</width>
       <height>60</height>
      </rect>
     </property>
@@ -55,7 +42,7 @@
    <widget class="QPushButton" name="file_button">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>320</x>
       <y>30</y>
       <width>60</width>
       <height>56</height>
@@ -92,7 +79,7 @@ QPushButton:pressed {
    <widget class="QPushButton" name="edit_button">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>410</x>
       <y>30</y>
       <width>60</width>
       <height>56</height>
@@ -129,7 +116,7 @@ QPushButton:pressed {
    <widget class="QPushButton" name="help_button">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>490</x>
       <y>30</y>
       <width>60</width>
       <height>56</height>
@@ -163,11 +150,327 @@ QPushButton:pressed {
      </size>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>220</y>
+      <x>900</x>
+      <y>100</y>
+      <width>300</width>
+      <height>591</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>121</red>
+          <green>201</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(121, 201, 255);
+border-color: rgbas(255, 255, 255,0);
+gridline-color: none;
+</string>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <property name="usesScrollButtons">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="pict_tab">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(121, 201, 255);</string>
+     </property>
+     <attribute name="title">
+      <string>pict</string>
+     </attribute>
+     <widget class="CustumList" name="listWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>260</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+gridline-color: rgb(255, 255, 255);
+border-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="text_tab">
+     <attribute name="title">
+      <string>text</string>
+     </attribute>
+     <widget class="QWidget" name="textwidget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>260</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <widget class="QFontComboBox" name="fontComboBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>231</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>320</y>
+         <width>221</width>
+         <height>80</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="text_insert_button">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>221</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>INSERT</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="left_text_button">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>230</y>
+         <width>70</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>left</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="center_text_button">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>230</y>
+         <width>71</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>center</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="right_text_button">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>230</y>
+         <width>71</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>right</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="textsize_slider">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>140</y>
+         <width>160</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>5</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>140</y>
+         <width>49</width>
+         <height>24</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="FontSize">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>62</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Font Size</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TextAlign">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Text Align</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Font">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>62</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Font</string>
+       </property>
+      </widget>
+      <zorder>center_text_button</zorder>
+      <zorder>left_text_button</zorder>
+      <zorder>right_text_button</zorder>
+      <zorder>fontComboBox</zorder>
+      <zorder>textEdit</zorder>
+      <zorder>text_insert_button</zorder>
+      <zorder>textsize_slider</zorder>
+      <zorder>spinBox</zorder>
+      <zorder>FontSize</zorder>
+      <zorder>TextAlign</zorder>
+      <zorder>Font</zorder>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>layout</string>
+     </attribute>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>260</y>
       <width>161</width>
       <height>431</height>
      </rect>
@@ -485,13 +788,52 @@ QPushButton:pressed {
      </item>
     </layout>
    </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>120</y>
+      <width>570</width>
+      <height>570</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="textlabel">
+     <property name="geometry">
+      <rect>
+       <x>19</x>
+       <y>329</y>
+       <width>531</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </widget>
+   <zorder>frame</zorder>
+   <zorder>graphicsView</zorder>
+   <zorder>file_button</zorder>
+   <zorder>edit_button</zorder>
+   <zorder>help_button</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1290</width>
+     <width>1276</width>
      <height>22</height>
     </rect>
    </property>
@@ -510,7 +852,6 @@ QPushButton:pressed {
    <addaction name="action_Open"/>
    <addaction name="action_Print"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Copy">
    <property name="text">
     <string>&amp;Copy</string>
@@ -565,6 +906,27 @@ QPushButton:pressed {
    <header>custumlist.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>frip_h_button</tabstop>
+  <tabstop>graphicsView</tabstop>
+  <tabstop>frip_v_button</tabstop>
+  <tabstop>extension_button</tabstop>
+  <tabstop>back_button</tabstop>
+  <tabstop>reduction_button</tabstop>
+  <tabstop>forward_button</tabstop>
+  <tabstop>sort_button</tabstop>
+  <tabstop>right_turn_button</tabstop>
+  <tabstop>left_turn_button</tabstop>
+  <tabstop>pile_button</tabstop>
+  <tabstop>edit_button</tabstop>
+  <tabstop>help_button</tabstop>
+  <tabstop>file_button</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>fontComboBox</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>text_insert_button</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
  <resources>
   <include location="Image.qrc"/>
  </resources>
@@ -582,6 +944,38 @@ QPushButton:pressed {
     <hint type="destinationlabel">
      <x>483</x>
      <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textsize_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>952</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>textsize_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>884</x>
+     <y>229</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>988</x>
+     <y>224</y>
     </hint>
    </hints>
   </connection>

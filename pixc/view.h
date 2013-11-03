@@ -23,6 +23,7 @@
 #include "scene.h"
 #include "mainwindow.h"
 #include <QUrl>
+#include <QLabel>
 class View : public QGraphicsView
 {
     Q_OBJECT
