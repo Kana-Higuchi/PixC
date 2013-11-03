@@ -126,39 +126,6 @@ int posy=100;
 void on_trackbar1 (int val);
 void on_trackbar2 (int val);
 
-void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
-{
-    /*
-    cv::Mat src = cv::imread("/Users/minemuradaiki/Desktop/a.jpg");
-    QImage img(src.data, src.cols, src.rows, QImage::Format_RGB888);
-    img = img.rgbSwapped(); //QImageの命令でRGBの順番を入れ替える
-
-    QPainter painter( this );
-    // 画像を描画
-    painter.drawImage( QPoint( 0, 0 ), img);
-
-    cv::Mat color_image = cv::imread("/Users/minemuradaiki/Desktop/a.jpg");
-    cv::Mat gray_image;
-    cv::cvtColor(color_image, gray_image, CV_BGR2GRAY); // BGR?
-
-    QImage img(gray_image.data,
-                 gray_image.cols,
-                 gray_image.rows,
-                 QImage::Format_Indexed8);
-    img = img.convertToFormat(QImage::Format_RGB32);
-
-    QPainter Painter(this);//ウィジット用のQPainter
-    Painter.drawImage(posx, posy, img);//ウィジットに先ほど描いたイメージ描
-
-    QImage image(this->size(), QImage::Format_ARGB32_Premultiplied);//空イメージ
-    QPainter imagePainter(&image);//空イメージを引数に
-    imagePainter.setRenderHint(QPainter::Antialiasing, true);
-    imagePainter.drawImage(50,50,QImage("/Users/minemuradaiki/Desktop/a.jpg"));//空イメージに画像を描画
-
-    QPainter widgetPainter(this);//ウィジット用のQPainter
-    widgetPainter.drawImage(posx, posy, image);//ウィジットに先ほど描いたイメージ描画
-    */
-}
 
 //void MainWindow::on_pushButton_clicked()
 //{
@@ -320,15 +287,6 @@ void MainWindow::paintEvent(QPaintEvent *)//←重要！ペイントイベント
 //    cvDestroyWindow("Image");
 //}
 
-void MainWindow::mouseMoveEvent(QMouseEvent *e)
-{
-    /*
-    startPos = e->pos();
-    posx=startPos.x()-64;
-    posy=startPos.y()-64;
-    update();
-    */
-}
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
@@ -336,17 +294,6 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *e)
     e->acceptProposedAction();
 }
 
-void MainWindow::dropEvent(QDropEvent *e)
-{
-    /*
-    //dragEnterEventの後にくるイベント
-    //ドロップの際の動作を記述する
-    startPos = e->pos();
-    posx=startPos.x()-64;
-    posy=startPos.y()-64;
-    update();
-    */
-}
 /* コOrangeールバック関数 */
 void on_trackbar1(int val) {
     gray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
