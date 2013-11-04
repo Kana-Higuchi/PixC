@@ -15,7 +15,7 @@
 #include "view.h"
 #include <QLabel>
 #include <QLayout>
-#include <QGraphicsProxyWidget>
+
 
 
 const int OffsetIncrement = 5;
@@ -84,11 +84,9 @@ MainWindow::~MainWindow()
 }
 void MainWindow::createSceneAndView()
 {
-
-
     scene = new Scene(this);//QGraphicsSceneオブジェクト生成
     scene->setSceneRect(0,0, 560, 560); //  シーン矩形部分o
-    QGraphicsProxyWidget *pw = scene->addWidget(ui->textlabel);
+    scene->addWidget(ui->textlabel);
 
     view = new View(ui->centralWidget);//QGraphicsViewオブジェクト生成
     view->setScene(scene);//ビューにシーンを配置
@@ -125,6 +123,7 @@ int posx=200;
 int posy=100;
 void on_trackbar1 (int val);
 void on_trackbar2 (int val);
+
 
 
 //void MainWindow::on_pushButton_clicked()
@@ -383,21 +382,31 @@ void MainWindow::on_action_Print_triggered()
 
 void MainWindow::on_left_text_button_clicked()
 {
-    ui->textlabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    ui->textlabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 }
 
 void MainWindow::on_center_text_button_clicked()
 {
-    ui->textlabel->setAlignment(Qt::AlignCenter);
+    ui->textlabel->setAlignment(Qt::AlignHCenter);
 }
 
 void MainWindow::on_right_text_button_clicked()
 {
-    ui->textlabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    ui->textlabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
 }
 
-void MainWindow::on_text_insert_button_clicked()
+
+void MainWindow::on_textsize_slider_valueChanged(int value)
 {
+        QString fon = ui->fontComboBox->currentText();
+        ui->textlabel->setFont(QFont(fon,value,QFont::Bold));
+        QString str = ui->textEdit->toPlainText();
+        ui->textlabel->setText(str);
+}
+
+void MainWindow::on_textEdit_textChanged()
+{
+    ui->textlabel->setAlignment(Qt::AlignHCenter);
     QString fon = ui->fontComboBox->currentText();
     int value = ui->spinBox->value();
     ui->textlabel->setFont( QFont(fon, value, QFont::Bold) );
@@ -406,10 +415,10 @@ void MainWindow::on_text_insert_button_clicked()
 }
 
 
-void MainWindow::on_textsize_slider_valueChanged(int value)
+void MainWindow::on_fontComboBox_currentIndexChanged(const QString &arg1)
 {
-    QString fon = ui->fontComboBox->currentText();
-    ui->textlabel->setFont(QFont(fon,value,QFont::Bold));
+    int value = ui->spinBox->value();
+    ui->textlabel->setFont(QFont(arg1,value, QFont::Bold) );
     QString str = ui->textEdit->toPlainText();
     ui->textlabel->setText(str);
 }

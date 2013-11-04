@@ -39,11 +39,13 @@ private slots:
     void on_action_Open_triggered();
     void on_action_Print_triggered();
 
-    void on_text_insert_button_clicked();
     void on_center_text_button_clicked();
     void on_right_text_button_clicked();
     void on_left_text_button_clicked();
     void on_textsize_slider_valueChanged(int value);
+
+    void on_textEdit_textChanged();
+    void on_fontComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
